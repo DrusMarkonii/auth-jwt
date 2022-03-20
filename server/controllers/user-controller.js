@@ -1,16 +1,16 @@
 const userService = require("../service/user-service");
-const UserService = require("../service/user-service");
+
 
 class UserController {
   async registration(req, res, next) {
     try {
-      const errors = validationResult(req);
+      // const errors = validationResult(req);
 
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ message: "Validation error" });
-      }
+      // if (!errors.isEmpty()) {
+      //   return res.status(400).json({ message: "Validation error" });
+      // }
 
-      const { username, password } = req.body;
+      const { email, password } = req.body;
       const userData = await userService.registration(email, password);
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -59,6 +59,9 @@ class UserController {
 
   async activate(req, res, next) {
     try {
+      const activationLink = req.params.Link
+      await userService.activate(activationLink)
+      res.send(process.env.CLIENT_URL)
     } catch (e) {
       console.log(e);
     }
