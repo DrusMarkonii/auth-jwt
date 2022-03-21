@@ -1,6 +1,5 @@
 const userService = require("../service/user-service");
 
-
 class UserController {
   async registration(req, res, next) {
     try {
@@ -18,15 +17,14 @@ class UserController {
       });
       return res.json(userData);
 
-    //   if (candidate) {
-    //     return res.status(400).json({ message: "User name exist" });
-    //   }
+      //   if (candidate) {
+      //     return res.status(400).json({ message: "User name exist" });
+      //   }
 
-    //   user.save();
-    //   return res.json({ message: "User has been successfully registered" });
+      //   user.save();
+      //   return res.json({ message: "User has been successfully registered" });
     } catch (e) {
-      console.log(e);
-      res.status(400).json({ message: "Registration error" });
+      next(e)
     }
   }
 
@@ -45,32 +43,32 @@ class UserController {
       const token = generateAccessToken(user._id, user.roles);
       return res.json({ token });
     } catch (e) {
-      console.log(e);
-      res.status(400).json({ message: "Login error" });
+      next(e)
     }
   }
 
   async logout(req, res, next) {
     try {
     } catch (e) {
-      console.log(e);
+      next(e)
     }
   }
 
   async activate(req, res, next) {
     try {
-      const activationLink = req.params.Link
-      await userService.activate(activationLink)
-      res.send(process.env.CLIENT_URL)
+      const activationLink = req.params.link;
+      console.log("link activation...", activationLink);
+      await userService.activate(activationLink);
+      res.redirect(process.env.CLIENT_URL);
     } catch (e) {
-      console.log(e);
+      next(e)
     }
   }
 
   async refresh(req, res, next) {
     try {
     } catch (e) {
-      console.log(e);
+      next(e)
     }
   }
 
@@ -78,7 +76,9 @@ class UserController {
     try {
       const users = await UserSchema.find();
       res.json(users);
-    } catch (e) {}
+    } catch (e) {
+      next(e)
+    }
   }
 }
 
