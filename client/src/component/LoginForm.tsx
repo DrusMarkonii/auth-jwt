@@ -20,23 +20,28 @@ const LoginForm: FC = () => {
     }
 
   return (
-    <div>
+    <div className='login-form'>
+      <div className='input-box'>
         <input 
-            type='text' 
-            placeholder='Email' 
-            value={email}
-            onChange={ e => setEmail(e.target.value)}
-        />
+              type='text' 
+              placeholder='Email' 
+              value={email}
+              onChange={ e => setEmail(e.target.value)}
+          />
 
-        <input 
-            type='text' 
-            placeholder='Password' 
-            value={password}
-            onChange={ e => setPassword(e.target.value)}
-        />
-
+          <input 
+              type='text' 
+              placeholder='Password' 
+              value={password}
+              onChange={ e => setPassword(e.target.value)}
+          />
+      </div>
+      <div className='btn-box'>
         <button onClick={loginSubmit}>Login</button>
         <button onClick ={RegistrationSubmit}>Registration</button>
+      </div>
+        
+
     </div>
   )
 }

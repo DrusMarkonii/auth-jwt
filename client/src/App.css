@@ -1,5 +1,9 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 50px auto;
+  width: 60%;
+  justify-content: center;
 }
 
 .App-logo {
@@ -35,4 +39,42 @@
   to {
     transform: rotate(360deg);
   }
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.btn-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+button {
+  width: 200px;
+  margin: 20px auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.get-users {
+  margin: 0 auto
+}
+
+.exit-btn {
+  margin: 0 auto
 }

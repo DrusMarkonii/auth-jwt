@@ -29,12 +29,13 @@ function App() {
   }
 
   if(!store.isAuth) {
-    return (<>
-      <LoginForm />
-      <div>
-        <button onClick={getUsers}>Получить пользователей</button>
+    return (
+      <div className="App">
+        <LoginForm />
+        <div className="exit-btn">
+          <button  onClick={getUsers}>Получить пользователей</button>
+        </div>
       </div>
-    </>
     )
   }
   return (
@@ -42,10 +43,10 @@ function App() {
       <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}`: 'Авторизуйтесь'}</h1>
       <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте': "ПОДТВЕРДИТЕ АККАУНТ"}</h1>
       <button onClick={() => store.logout() }>Exit</button>
-      <div>
+      <div className='get-users'>
         <button onClick={getUsers}>Получить пользователей</button>
+        {users.map(user => <div key={user.id}>{user.email}</div>)}
       </div>
-      {users.map(user => <div key={user.id}>{user.email}</div>)}
     </div>
   );
 }
