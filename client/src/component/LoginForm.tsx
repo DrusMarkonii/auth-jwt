@@ -1,8 +1,24 @@
-import React, { FC, useState } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC, useContext, useState } from 'react'
+import { Context } from '../index'
 
 const LoginForm: FC = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const {store} = useContext(Context)
+
+    const loginSubmit = () => {
+      store.login(email, password)
+      setEmail('')
+      setPassword('')
+    }
+
+    const RegistrationSubmit = () => {
+      store.registration(email, password)
+      setEmail('')
+      setPassword('')
+    }
+
   return (
     <div>
         <input 
@@ -19,10 +35,10 @@ const LoginForm: FC = () => {
             onChange={ e => setPassword(e.target.value)}
         />
 
-        <button>Login</button>
-        <button>Registration</button>
+        <button onClick={loginSubmit}>Login</button>
+        <button onClick ={RegistrationSubmit}>Registration</button>
     </div>
   )
 }
 
-export default LoginForm
+export default observer(LoginForm)
